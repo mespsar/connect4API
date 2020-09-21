@@ -23,12 +23,10 @@ const Connect4=mongoose.model("Connect4",connect4)
 mongoose.connect("mongodb+srv://suryapal:12345six@cluster0.bfzxp.gcp.mongodb.net/connect4?retryWrites=true&w=majority",{ useNewUrlParser: true })
 
 app.get("/start",(req,res)=>{
-  console.log(req)
 var x=0
 
 Connect4.update({},connect4, function(err, resp) {
  if (err) throw err;
- console.log("1 document updated");
 })
 res.send("ready!")
 })
@@ -38,22 +36,29 @@ var ret=0
 col=req.body.column
 Connect4.find(function(err,response){
 table=response
-console.log(col);
 ret=(updateTable(col,table[0].turn,table[0].gameArray));
 
 x=checkIfwin(table[0].gameArray)
 if(x!==0){
   if(x===1){
+   console.log("yellow won");
     res.send("yellow won")
+
   }
   else{
+
+    console.log("red won");
     res.send("red won")
   }
 }
 if(x===0){
   if(ret===1){
-  res.send("valid")}
+    console.log("vaild");
+
+  res.send("valid")
+}
   else{
+    console.log("invaild");
 
     res.send("invalid")
   }
@@ -64,8 +69,11 @@ if(x===0){
 })
 
 function updateTable(col,turn,gameAr){
-  if(col<0 || col>6){
-  return(0)}
+
+  if(col>6){
+
+     return(0)
+   }
   turn=turn+1
 if(turn==1){
 return(upTableOdd(col,turn,gameAr))
@@ -90,7 +98,6 @@ if(gameAr[i][col]!==0){
 if(gameAr[5][col]===0)
 {
   gameAr[5][col]=1
-  console.log("win",checkIfwin(gameAr));
   updateTabInDb(turn,gameAr)
   return(1)
 
@@ -101,7 +108,6 @@ while(i<6){
   }
 
   else{gameAr[i-1][col]=1
-    console.log("win",checkIfwin(gameAr));
 
     updateTabInDb(turn,gameAr)
 
@@ -114,7 +120,6 @@ while(i<6){
 
 function upTableEven(col,turn,gameAr){
 var i=0
-console.log("here")
 
 if(gameAr[i][col]!==0){
   return(0)
@@ -122,7 +127,6 @@ if(gameAr[i][col]!==0){
 if(gameAr[5][col]===0)
 {
   gameAr[5][col]=2
-  console.log("win",checkIfwin(gameAr));
 
 
   updateTabInDb(turn,gameAr)
@@ -134,7 +138,6 @@ while(i<6){
     i=i+1
   }
   else{gameAr[i-1][col]=2
-    console.log("win",checkIfwin(gameAr));
 
 
     updateTabInDb(turn,gameAr)
@@ -152,7 +155,6 @@ function   updateTabInDb(turn,gameAr){
   }
   Connect4.update({}, newvalues, function(err, res) {
    if (err) throw err;
-   console.log("1 document updated");
 })
 }
 function chkLine(a,b,c,d) {
