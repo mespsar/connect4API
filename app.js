@@ -188,10 +188,11 @@ function checkIfwin(bd){
       return 0;
 
 }
-const port=process.env.PORT
-if(port==null || port=""){
+let port=process.env.PORT
+if(port==null || port==""){
   port=3000
 }
+//listening
 app.listen(port,function(){
   console.log("working")
 })
