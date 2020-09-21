@@ -24,7 +24,7 @@ mongoose.connect("mongodb+srv://suryapal:12345six@cluster0.bfzxp.gcp.mongodb.net
 
 app.get("/start",(req,res)=>{
   console.log(req)
-
+var x=0
 
 Connect4.update({},connect4, function(err, resp) {
  if (err) throw err;
@@ -40,12 +40,25 @@ Connect4.find(function(err,response){
 table=response
 console.log(col);
 ret=(updateTable(col,table[0].turn,table[0].gameArray));
-if(ret===1){
-res.send("valid")}
-else{
 
-  res.send("invalid")
+x=checkIfwin(table[0].gameArray)
+if(x!==0){
+  if(x===1){
+    res.send("yellow won")
+  }
+  else{
+    res.send("red won")
+  }
 }
+if(x===0){
+  if(ret===1){
+  res.send("valid")}
+  else{
+
+    res.send("invalid")
+  }
+}
+
 })
 
 })
