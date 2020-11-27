@@ -20,7 +20,7 @@ app.set('view engine','ejs')
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(express.static("public"))
 const Connect4=mongoose.model("Connect4",connect4)
-mongoose.connect("mongodb+srv://suryapal:12345six@cluster0.bfzxp.gcp.mongodb.net/connect4?retryWrites=true&w=majority",{ useNewUrlParser: true })
+mongoose.connect("mongodb+srv://username:password@cluster0.bfzxp.gcp.mongodb.net/connect4?retryWrites=true&w=majority",{ useNewUrlParser: true })
 
 app.get("/start",(req,res)=>{
 var x=0
