@@ -1,2 +1,0 @@
-doing a get request to /start leads to new game and returns ready
-after that post request to /start with body having {column:somevalue} will put coin in that columns
