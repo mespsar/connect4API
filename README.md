@@ -24,8 +24,7 @@ The winner is the first player who gets a straight line made with four own piece
 
 Connect4 game logic using APIs:
 I have used postman for testing and have included the screenshots of the testing.
-Url:  https://tranquil-castle-05262.herokuapp.com/start
-When a get request in done on the above given URL it will return ("Ready!")
+
 
 
 And subsequently doing POST requests with column value also being passed in the post request as a body parameter will result in a coin  being dropped in that column in my mongoDbAtlas database
